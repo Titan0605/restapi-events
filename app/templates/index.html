@@ -1,141 +1,216 @@
-{% extends "/layouts/base.html"%}{% block body %}
-
-<div class="btn-group">
-  <!-- TIPOS DE EVENTOS -->
-  <input class="fecha" type="date" id="fecha" name="fecha" />
-  <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin: 1.5rem">Tipo de evento</button>
-  <ul class="dropdown-menu">
-    <input type="checkbox" id="tipo" name="tipo" placeholder="Tipo de evento" value="Cultural" />Cultural
-    <input type="checkbox" id="tipo" name="tipo" placeholder="Tipo de evento" value="Deportivo" />Deportivo
-    <input type="checkbox" id="tipo" name="tipo" placeholder="Tipo de evento" value="Musical" />Musical
-  </ul>
-  <!-- PRESUPUESTO -->
-  <input class="presup" type="number" id="presupuesto" name="presupuesto" placeholder="Presupuesto" min="0" max="5000" />
+{% extends "/layouts/base.html"%}
+{% block title %}ChiFest{% endblock %}
+{% block body %}
+<!-- Hero Banner -->
+<div class="bg-dark text-white p-5 rounded-3 mb-5 text-center">
+  <div class="py-4">
+    <h1 class="display-4 fw-bold">Descubre los mejores eventos en Chihuahua</h1>
+    <p class="fs-5 my-4">Música, cultura, deportes y más experiencias increíbles en tu ciudad</p>
+    <button class="btn btn-warning btn-lg px-4">Ver todos los eventos</button>
+  </div>
 </div>
-<section class="pt-5 pb-5">
-  <div class="container">
-    <div class="mx-auto" style="max-width: 1000px">
-      <div class="text-center">
-        <h3>Eventos</h3>
+
+<!-- Filtros -->
+<div class="bg-white p-4 rounded-3 shadow-sm mb-5">
+  <div class="g-3 d-flex gap-3">
+    <div class="">
+      <label for="fecha" class="form-label fw-bold">Fecha</label>
+      <input class="form-control" type="date" id="fecha" name="fecha" />
+    </div>
+    <div class="">
+      <label class="form-label fw-bold">Tipo de evento</label>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Seleccionar categorías</button>
+        <ul class="dropdown-menu p-3 w-100">
+          <li class="mb-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="cultural" name="tipo" value="Cultural" />
+              <label class="form-check-label" for="cultural">Cultural</label>
+            </div>
+          </li>
+          <li class="mb-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="deportivo" name="tipo" value="Deportivo" />
+              <label class="form-check-label" for="deportivo">Deportivo</label>
+            </div>
+          </li>
+          <li>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="musical" name="tipo" value="Musical" />
+              <label class="form-check-label" for="musical">Musical</label>
+            </div>
+          </li>
+        </ul>
       </div>
+    </div>
+    <div class="">
+      <label for="presupuesto" class="form-label fw-bold">Presupuesto máximo</label>
+      <input class="form-control" type="number" id="presupuesto" name="presupuesto" placeholder="MXN" min="0" max="5000" />
+    </div>
+    <div class="d-flex align-items-end">
+      <button class="btn btn-warning w-100">Filtrar eventos</button>
+    </div>
+  </div>
+</div>
 
-      <div class="col-12">
-        <div id="carouselExampleIndicators2" class="carousel slide" data-bs-interval="false">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <div class="card" style="width: 18rem">
-                    <img class="card-img-top" alt="100%x280" src="../static/img/cuu.jpg" />
-                    <div class="card-body">
-                      <h4 class="card-title"></h4>
-                      <h3>Evento</h3>
-                      <h4>Musica y Baile/ Centro de la ciudad</h4>
-                      <p class="card-text">Se presentara un grupo a tocar musica en el centro de la ciudad de Chihuahua y todo el que pase se podra unir</p>
-                      <h5>20/03/2025</h5>
-                      <h5>13:00 Hrs</h5>
-                      <h5>Gratuito</h5>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card" style="width: 18rem">
-                    <img class="card-img-top" alt="100%x280" src="../static/img/cuu.jpg" />
-                    <div class="card-body">
-                      <h4 class="card-title">Special title treatment</h4>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card" style="width: 18rem">
-                    <img class="card-img-top" alt="100%x280" src="../static/img/cuu.jpg" />
-                    <div class="card-body">
-                      <h4 class="card-title">Special title treatment</h4>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                  </div>
-                </div>
+<!-- Sección de Eventos -->
+<div class="mb-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fs-1 fw-bold text-dark mb-0">Eventos destacados</h2>
+    <div>
+      <button class="btn btn-outline-dark me-2">Ver todos</button>
+    </div>
+  </div>
+
+  <!-- Carrusel de eventos -->
+  <div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="false">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="position-relative">
+                <img class="card-img-top" src="../static/img/musica.jpg" alt="Evento de música" />
+                <span class="position-absolute top-0 end-0 bg-warning text-dark m-2 px-2 py-1 rounded-pill fs-6">Musical</span>
               </div>
-            </div>
-
-            <div class="carousel-item">
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <div class="card" style="width: 18rem">
-                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu.jpeg" />
-                    <div class="card-body">
-                      <h4 class="card-title">Special title treatment</h4>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                  </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fa-solid fa-calendar-days"></i> 20/03/2025</span>
+                  <span class="text-danger fw-bold">Gratuito</span>
                 </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card" style="width: 18rem">
-                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu.jpeg" />
-                    <div class="card-body">
-                      <h4 class="card-title">Special title treatment</h4>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card" style="width: 18rem">
-                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu.jpeg" />
-                    <div class="card-body">
-                      <h4 class="card-title">Special title treatment</h4>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="carousel-item">
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <div class="card" style="width: 18rem">
-                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu2.jpeg" />
-                    <div class="card-body">
-                      <h4 class="card-title">Special title treatment</h4>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card" style="width: 18rem">
-                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu.jpeg" />
-                    <div class="card-body">
-                      <h4 class="card-title">Special title treatment</h4>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <div class="card" style="width: 18rem">
-                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu2.jpeg" />
-                    <div class="card-body">
-                      <h4 class="card-title">Special title treatment</h4>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                  </div>
+                <h3 class="card-title h5 fw-bold">Música y Baile en el Centro</h3>
+                <p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Centro de la ciudad</p>
+                <p class="card-text">Se presentará un grupo a tocar música en el centro de la ciudad de Chihuahua y todo el que pase se podrá unir.</p>
+                <div class="d-flex justify-content-between">
+                  <span class="text-muted"><i class="fas fa-clock me-1"></i> 13:00 Hrs</span>
+                  <a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
                 </div>
               </div>
             </div>
           </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="position-relative">
+                <img class="card-img-top h-100" src="../static/img/cultural_2.jpg" alt="Evento cultural" />
+                <span class="position-absolute top-0 end-0 bg-success text-white m-2 px-2 py-1 rounded-pill fs-6">Cultural</span>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fa-solid fa-calendar-days"></i> 15/03/2025</span>
+                  <span class="text-danger fw-bold">$150 MXN</span>
+                </div>
+                <h3 class="card-title h5 fw-bold">Exposición de Arte Local</h3>
+                <p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Museo de Arte Contemporáneo</p>
+                <p class="card-text">Exhibición con obras de artistas locales mostrando la cultura y tradiciones de Chihuahua.</p>
+                <div class="d-flex justify-content-between">
+                  <span class="text-muted"><i class="fas fa-clock me-1"></i> 10:00 Hrs</span>
+                  <a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="position-relative">
+                <img class="card-img-top" src="../static/img/deportivo.jpeg" alt="Evento deportivo" />
+                <span class="position-absolute top-0 end-0 bg-info text-dark m-2 px-2 py-1 rounded-pill fs-6">Deportivo</span>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fa-solid fa-calendar-days"></i> 25/03/2025</span>
+                  <span class="text-danger fw-bold">$200 MXN</span>
+                </div>
+                <h3 class="card-title h5 fw-bold">Carrera 5K por la Ciudad</h3>
+                <p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Parque El Palomar</p>
+                <p class="card-text">Carrera recreativa para todas las edades. Inscripciones incluyen kit deportivo y medalla.</p>
+                <div class="d-flex justify-content-between">
+                  <span class="text-muted"><i class="fas fa-clock me-1"></i> 07:00 Hrs</span>
+                  <a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          <!-- Controles del carrusel -->
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Siguiente</span>
-          </button>
+      <div class="carousel-item">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="position-relative">
+                <img class="card-img-top" src="/api/placeholder/400/200" alt="Concierto" />
+                <span class="position-absolute top-0 end-0 bg-warning text-dark m-2 px-2 py-1 rounded-pill fs-6">Musical</span>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fas fa-calendar me-1"></i> 01/04/2025</span>
+                  <span class="text-danger fw-bold">$350 MXN</span>
+                </div>
+                <h3 class="card-title h5 fw-bold">Concierto de Rock Local</h3>
+                <p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Foro del Lago</p>
+                <p class="card-text">Las mejores bandas locales presentando sus nuevos álbumes. Evento para todas las edades.</p>
+                <div class="d-flex justify-content-between">
+                  <span class="text-muted"><i class="fas fa-clock me-1"></i> 20:00 Hrs</span>
+                  <a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="position-relative">
+                <img class="card-img-top" src="/api/placeholder/400/200" alt="Festival gastronómico" />
+                <span class="position-absolute top-0 end-0 bg-success text-white m-2 px-2 py-1 rounded-pill fs-6">Cultural</span>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fas fa-calendar me-1"></i> 10/04/2025</span>
+                  <span class="text-danger fw-bold">$100 MXN</span>
+                </div>
+                <h3 class="card-title h5 fw-bold">Festival Gastronómico</h3>
+                <p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Plaza Mayor</p>
+                <p class="card-text">Degustación de platillos típicos de Chihuahua con los mejores chefs de la región.</p>
+                <div class="d-flex justify-content-between">
+                  <span class="text-muted"><i class="fas fa-clock me-1"></i> 12:00 Hrs</span>
+                  <a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+              <div class="position-relative">
+                <img class="card-img-top" src="/api/placeholder/400/200" alt="Torneo de futbol" />
+                <span class="position-absolute top-0 end-0 bg-info text-dark m-2 px-2 py-1 rounded-pill fs-6">Deportivo</span>
+              </div>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fas fa-calendar me-1"></i> 05/04/2025</span>
+                  <span class="text-danger fw-bold">$80 MXN</span>
+                </div>
+                <h3 class="card-title h5 fw-bold">Torneo de Fútbol Amateur</h3>
+                <p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Deportiva Sur</p>
+                <p class="card-text">Participa en el torneo relámpago de fútbol 7. Inscribe a tu equipo y gana grandes premios.</p>
+                <div class="d-flex justify-content-between">
+                  <span class="text-muted"><i class="fas fa-clock me-1"></i> 09:00 Hrs</span>
+                  <a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <!-- Controles del carrusel -->
+    <button class="carousel-control-prev bg-dark bg-opacity-25" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev" style="width: 5%">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next bg-dark bg-opacity-25" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next" style="width: 5%">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
   </div>
-</section>
+</div>
 {% endblock %}
