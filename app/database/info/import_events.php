@@ -6,7 +6,7 @@ $dbPass = '';     // Contraseña vacía por defecto en XAMPP
 $dbName = 'events_db';
 
 // Configuración de SerpApi
-$apiKey = 'ec761a942d039c200d7e7d9ae855b61b65e4b369d71c755f57cb836dee577559'; // Necesitas reemplazar esto con tu clave API de SerpApi
+$apiKey = 'apikey'; // Necesitas reemplazar esto con tu clave API de SerpApi
 $location = 'Chihuahua, Mexico';
 $minEventsNeeded = 50; // Número mínimo de eventos que quieres obtener
 
