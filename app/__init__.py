@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_mysqldb import MySQL
 from config import Config
+from app.routes import index
 
 mysql = MySQL()
 
@@ -17,5 +18,7 @@ def create_app(config_class = Config):
     app.config['MYSQL_CURSORCLASS'] = app.config.get('DB_CURSORCLASS')
 
     mysql.init_app(app)
+    
+    app.register_blueprint(index.bp)
     
     return app

@@ -1,0 +1,141 @@
+{% extends "/layouts/base.html"%}{% block body %}
+
+<div class="btn-group">
+  <!-- TIPOS DE EVENTOS -->
+  <input class="fecha" type="date" id="fecha" name="fecha" />
+  <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin: 1.5rem">Tipo de evento</button>
+  <ul class="dropdown-menu">
+    <input type="checkbox" id="tipo" name="tipo" placeholder="Tipo de evento" value="Cultural" />Cultural
+    <input type="checkbox" id="tipo" name="tipo" placeholder="Tipo de evento" value="Deportivo" />Deportivo
+    <input type="checkbox" id="tipo" name="tipo" placeholder="Tipo de evento" value="Musical" />Musical
+  </ul>
+  <!-- PRESUPUESTO -->
+  <input class="presup" type="number" id="presupuesto" name="presupuesto" placeholder="Presupuesto" min="0" max="5000" />
+</div>
+<section class="pt-5 pb-5">
+  <div class="container">
+    <div class="mx-auto" style="max-width: 1000px">
+      <div class="text-center">
+        <h3>Eventos</h3>
+      </div>
+
+      <div class="col-12">
+        <div id="carouselExampleIndicators2" class="carousel slide" data-bs-interval="false">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <div class="card" style="width: 18rem">
+                    <img class="card-img-top" alt="100%x280" src="../static/img/cuu.jpg" />
+                    <div class="card-body">
+                      <h4 class="card-title"></h4>
+                      <h3>Evento</h3>
+                      <h4>Musica y Baile/ Centro de la ciudad</h4>
+                      <p class="card-text">Se presentara un grupo a tocar musica en el centro de la ciudad de Chihuahua y todo el que pase se podra unir</p>
+                      <h5>20/03/2025</h5>
+                      <h5>13:00 Hrs</h5>
+                      <h5>Gratuito</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card" style="width: 18rem">
+                    <img class="card-img-top" alt="100%x280" src="../static/img/cuu.jpg" />
+                    <div class="card-body">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card" style="width: 18rem">
+                    <img class="card-img-top" alt="100%x280" src="../static/img/cuu.jpg" />
+                    <div class="card-body">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <div class="card" style="width: 18rem">
+                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu.jpeg" />
+                    <div class="card-body">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card" style="width: 18rem">
+                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu.jpeg" />
+                    <div class="card-body">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card" style="width: 18rem">
+                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu.jpeg" />
+                    <div class="card-body">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <div class="card" style="width: 18rem">
+                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu2.jpeg" />
+                    <div class="card-body">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card" style="width: 18rem">
+                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu.jpeg" />
+                    <div class="card-body">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card" style="width: 18rem">
+                    <img class="card-img-top" alt="100%x280" src="/app/static/img/cuu2.jpeg" />
+                    <div class="card-body">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controles del carrusel -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Siguiente</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
