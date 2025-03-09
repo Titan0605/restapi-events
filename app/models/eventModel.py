@@ -9,18 +9,18 @@ class EventModel:
         self.organizer = ()
         self.type = ()
 
-    def get_location_by_id(self, id):
-        self.cur.execute(f"SELECT * FROM tlocations WHERE id = {id}")
+    def get_location_by_id(self, id_location):
+        self.cur.execute("SELECT * FROM tlocations WHERE id = %s", (id_location,))
         self.location = self.cur.fetchone()
         return self.location
     
-    def get_organizer_by_id(self, id):
-        self.cur.execute(f"SELECT * FROM torganizers WHERE id = {id}")
+    def get_organizer_by_id(self, id_organizer):
+        self.cur.execute("SELECT * FROM torganizers WHERE id = %s", (id_organizer,))
         self.organizer = self.cur.fetchone()
         return self.organizer
     
-    def get_type_by_id(self, id):
-        self.cur.execute(f"SELECT * FROM tevent_types WHERE id = {id}")
+    def get_type_by_id(self, id_type):
+        self.cur.execute("SELECT * FROM tevent_types WHERE id = %s", (id_type,))
         self.type = self.cur.fetchone()
         return self.type
 
@@ -52,8 +52,8 @@ class EventModel:
         close_cursor(self.cur)
         return self.events
     
-    def get_event_with_id(self, id):
-        self.cur.execute("SELECT * FROM tevents WHERE id = %s", (id,))
+    def get_event_with_id(self, id_event):
+        self.cur.execute("SELECT * FROM tevents WHERE id = %s", (id_event,))
         event = self.cur.fetchone()
         event = self.get_details(event)
         close_cursor(self.cur)
