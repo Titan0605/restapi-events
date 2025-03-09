@@ -39,7 +39,7 @@ $(function () {
                                 </p>
                             </div>
                             <div class="card-footer d-flex justify-content-end">
-                                <a href="/events/${event.id}" class="btn btn-warning">Ver detalles</a>
+                                <a href="/event/${event.id}" class="btn btn-warning">Ver detalles</a>
                             </div>
                             </div>
                         </div>

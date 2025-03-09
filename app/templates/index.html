@@ -49,7 +49,7 @@
 			<input class="form-control" type="number" id="presupuesto" name="presupuesto" placeholder="MXN" min="0" max="5000" />
 		</div>
 		<div class="d-flex align-items-end">
-			<button type="submit" class="btn btn-warning w-100">Filtrar eventos</button>
+			<button type="submit" class="btn btn-warning w-100">Buscar eventos</button>
 		</div>
 	</form>
 </div>
@@ -73,137 +73,29 @@
 		<div class="carousel-inner">
 			<div class="carousel-item active">
 				<div class="row g-4">
-					<div class="col-md-4">
-						<div class="card h-100 shadow-sm">
-							<div class="position-relative">
-								<img class="card-img-top" src="../static/img/musica.jpg" alt="Evento de música" />
-								<span class="position-absolute top-0 end-0 bg-warning text-dark m-2 px-2 py-1 rounded-pill fs-6">Musical</span>
-							</div>
-							<div class="card-body">
-								<div class="d-flex justify-content-between align-items-center mb-2">
-									<span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fa-solid fa-calendar-days"></i> 20/03/2025</span>
-									<span class="text-danger fw-bold">Gratuito</span>
+					{% for event in events: %}
+						<div class="col-md-4">
+							<div class="card h-100 shadow-sm">
+								<div class="position-relative">
+									<img class="card-img-top" src="{{ event.image }}" alt="{{ event.name }}" />
+									<span class="position-absolute top-0 end-0 bg-warning text-dark m-2 px-2 py-1 rounded-pill fs-6">{{ event.type_id }}</span>
 								</div>
-								<h3 class="card-title h5 fw-bold">Música y Baile en el Centro</h3>
-								<p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Centro de la ciudad</p>
-								<p class="card-text">Se presentará un grupo a tocar música en el centro de la ciudad de Chihuahua y todo el que pase se podrá unir.</p>
-								<div class="d-flex justify-content-between">
-									<span class="text-muted"><i class="fas fa-clock me-1"></i> 13:00 Hrs</span>
-									<a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="card h-100 shadow-sm">
-							<div class="position-relative">
-								<img class="card-img-top h-100" src="../static/img/cultural_2.jpg" alt="Evento cultural" />
-								<span class="position-absolute top-0 end-0 bg-success text-white m-2 px-2 py-1 rounded-pill fs-6">Cultural</span>
-							</div>
-							<div class="card-body">
-								<div class="d-flex justify-content-between align-items-center mb-2">
-									<span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fa-solid fa-calendar-days"></i> 15/03/2025</span>
-									<span class="text-danger fw-bold">$150 MXN</span>
-								</div>
-								<h3 class="card-title h5 fw-bold">Exposición de Arte Local</h3>
-								<p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Museo de Arte Contemporáneo</p>
-								<p class="card-text">Exhibición con obras de artistas locales mostrando la cultura y tradiciones de Chihuahua.</p>
-								<div class="d-flex justify-content-between">
-									<span class="text-muted"><i class="fas fa-clock me-1"></i> 10:00 Hrs</span>
-									<a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
+								<div class="card-body">
+									<div class="d-flex justify-content-between align-items-center mb-2">
+										<span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fa-solid fa-calendar-days"></i>{{ event.date }}</span>
+										<span class="text-danger fw-bold">{{ event.budget }}</span>
+									</div>
+									<h3 class="card-title h5 fw-bold">{{ event.name }}</h3>
+									<p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Centro de la ciudad</p>
+									<p class="card-text">{{ event.description }}</p>
+									<div class="d-flex justify-content-between">
+										<span class="text-muted"><i class="fas fa-clock me-1"></i> 13:00 Hrs</span>
+										<a href="/event/{{ event.id }}" class="btn btn-sm btn-outline-primary">Ver detalles</a>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="card h-100 shadow-sm">
-							<div class="position-relative">
-								<img class="card-img-top" src="../static/img/deportivo.jpeg" alt="Evento deportivo" />
-								<span class="position-absolute top-0 end-0 bg-info text-dark m-2 px-2 py-1 rounded-pill fs-6">Deportivo</span>
-							</div>
-							<div class="card-body">
-								<div class="d-flex justify-content-between align-items-center mb-2">
-									<span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fa-solid fa-calendar-days"></i> 25/03/2025</span>
-									<span class="text-danger fw-bold">$200 MXN</span>
-								</div>
-								<h3 class="card-title h5 fw-bold">Carrera 5K por la Ciudad</h3>
-								<p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Parque El Palomar</p>
-								<p class="card-text">Carrera recreativa para todas las edades. Inscripciones incluyen kit deportivo y medalla.</p>
-								<div class="d-flex justify-content-between">
-									<span class="text-muted"><i class="fas fa-clock me-1"></i> 07:00 Hrs</span>
-									<a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="carousel-item">
-				<div class="row g-4">
-					<div class="col-md-4">
-						<div class="card h-100 shadow-sm">
-							<div class="position-relative">
-								<img class="card-img-top" src="/api/placeholder/400/200" alt="Concierto" />
-								<span class="position-absolute top-0 end-0 bg-warning text-dark m-2 px-2 py-1 rounded-pill fs-6">Musical</span>
-							</div>
-							<div class="card-body">
-								<div class="d-flex justify-content-between align-items-center mb-2">
-									<span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fas fa-calendar me-1"></i> 01/04/2025</span>
-									<span class="text-danger fw-bold">$350 MXN</span>
-								</div>
-								<h3 class="card-title h5 fw-bold">Concierto de Rock Local</h3>
-								<p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Foro del Lago</p>
-								<p class="card-text">Las mejores bandas locales presentando sus nuevos álbumes. Evento para todas las edades.</p>
-								<div class="d-flex justify-content-between">
-									<span class="text-muted"><i class="fas fa-clock me-1"></i> 20:00 Hrs</span>
-									<a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="card h-100 shadow-sm">
-							<div class="position-relative">
-								<img class="card-img-top" src="/api/placeholder/400/200" alt="Festival gastronómico" />
-								<span class="position-absolute top-0 end-0 bg-success text-white m-2 px-2 py-1 rounded-pill fs-6">Cultural</span>
-							</div>
-							<div class="card-body">
-								<div class="d-flex justify-content-between align-items-center mb-2">
-									<span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fas fa-calendar me-1"></i> 10/04/2025</span>
-									<span class="text-danger fw-bold">$100 MXN</span>
-								</div>
-								<h3 class="card-title h5 fw-bold">Festival Gastronómico</h3>
-								<p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Plaza Mayor</p>
-								<p class="card-text">Degustación de platillos típicos de Chihuahua con los mejores chefs de la región.</p>
-								<div class="d-flex justify-content-between">
-									<span class="text-muted"><i class="fas fa-clock me-1"></i> 12:00 Hrs</span>
-									<a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="card h-100 shadow-sm">
-							<div class="position-relative">
-								<img class="card-img-top" src="/api/placeholder/400/200" alt="Torneo de futbol" />
-								<span class="position-absolute top-0 end-0 bg-info text-dark m-2 px-2 py-1 rounded-pill fs-6">Deportivo</span>
-							</div>
-							<div class="card-body">
-								<div class="d-flex justify-content-between align-items-center mb-2">
-									<span class="bg-primary text-white px-2 py-1 rounded-2"><i class="fas fa-calendar me-1"></i> 05/04/2025</span>
-									<span class="text-danger fw-bold">$80 MXN</span>
-								</div>
-								<h3 class="card-title h5 fw-bold">Torneo de Fútbol Amateur</h3>
-								<p class="card-text text-muted mb-3"><i class="fas fa-map-marker-alt me-1"></i> Deportiva Sur</p>
-								<p class="card-text">Participa en el torneo relámpago de fútbol 7. Inscribe a tu equipo y gana grandes premios.</p>
-								<div class="d-flex justify-content-between">
-									<span class="text-muted"><i class="fas fa-clock me-1"></i> 09:00 Hrs</span>
-									<a href="#" class="btn btn-sm btn-outline-primary">Ver detalles</a>
-								</div>
-							</div>
-						</div>
-					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
