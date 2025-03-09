@@ -5,16 +5,57 @@ class EventModel:
     def __init__(self):
         self.events = ()
         self.cur = get_cursor()
-        
+        self.location = ()
+        self.organizer = ()
+        self.type = ()
+
+    def get_location_by_id(self, id):
+        self.cur.execute(f"SELECT * FROM tlocations WHERE id = {id}")
+        self.location = self.cur.fetchone()
+        return self.location
+    
+    def get_organizer_by_id(self, id):
+        self.cur.execute(f"SELECT * FROM torganizers WHERE id = {id}")
+        self.organizer = self.cur.fetchone()
+        return self.organizer
+    
+    def get_type_by_id(self, id):
+        self.cur.execute(f"SELECT * FROM tevent_types WHERE id = {id}")
+        self.type = self.cur.fetchone()
+        return self.type
+
+    def get_details(self, events_data):
+        if isinstance(events_data, dict):
+            events_data["location"] = self.get_location_by_id(events_data["location_id"])
+            events_data["organizer"] = self.get_organizer_by_id(events_data["organizer_id"])
+            events_data["type"] = self.get_type_by_id(events_data["type_id"])
+
+            return events_data
+        else:
+            events_with_details = []
+
+            for event in events_data:
+                event_copy = dict(event)
+
+                event_copy["location"] = self.get_location_by_id(event["location_id"])
+                event_copy["organizer"] = self.get_organizer_by_id(event["organizer_id"])
+                event_copy["type"] = self.get_type_by_id(event["type_id"])
+                
+                events_with_details.append(event_copy)
+            
+            return tuple(events_with_details)
+
     def get_events(self):
         self.cur.execute("SELECT * FROM tevents ORDER BY id")
         self.events = self.cur.fetchall()
+        self.events = self.get_details(self.events)
         close_cursor(self.cur)
         return self.events
     
     def get_event_with_id(self, id):
         self.cur.execute("SELECT * FROM tevents WHERE id = %s", (id,))
         event = self.cur.fetchone()
+        event = self.get_details(event)
         close_cursor(self.cur)
         return event
     
@@ -46,6 +87,7 @@ class EventModel:
         # Ejecutar la consulta con los parámetros
         self.cur.execute(query, tuple(params))
         self.events = self.cur.fetchall()
+        self.events = self.get_details(self.events)
         close_cursor(self.cur)
         return self.events
 
@@ -62,5 +104,6 @@ class EventModel:
         query = f"SELECT * FROM tevents WHERE date >= '{date.today()}' AND date <= '{date.today() + timedelta(7)}'"
         self.cur.execute(query)
         self.events = self.cur.fetchall()
+        self.events = self.get_details(self.events)
         close_cursor(self.cur)
         return self.events

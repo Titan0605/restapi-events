@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, jsonify
+from flask import Blueprint, render_template, jsonify, current_app
+from mapkick.flask import Map
 import requests
 
 bp = Blueprint('views', __name__)
@@ -28,7 +29,9 @@ def show_event(id):
 
         event = response.json()
 
-        return render_template('event_detail.html', event=event)
+        map = Map([{'latitude': event["location"]["lat"], 'longitude': event["location"]["lng"]}])
+
+        return render_template('event_detail.html', event=event, map=map, mapbox_token=current_app.config["MAPBOX_ACCESS_TOKEN"])
     
     except requests.exceptions.RequestException as e:
         return jsonify({"error": str(e)}), 500
