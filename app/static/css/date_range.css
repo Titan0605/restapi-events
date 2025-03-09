@@ -1,0 +1,23 @@
+/* Estilos personalizados para Daterangepicker con tema Bootstrap */
+.daterangepicker {
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+  }
+  
+  .daterangepicker .ranges li.active {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+  }
+  
+  .daterangepicker td.active, 
+  .daterangepicker td.active:hover {
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: #000 !important;
+  }
+  
+  .daterangepicker .btn-primary {
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+    color: #000 !important;
+  }
