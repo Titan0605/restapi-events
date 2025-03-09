@@ -1,12 +1,10 @@
-from app import mysql
+from app.database.db import mysql
 
 def get_cursor():
     """ 
     Return a cursor to execute queries to the database.
     """
-    conn = mysql.connection
-    cursor = conn.cursor()
-    return cursor
+    return mysql.connection.cursor()
 
 def commit_changes():
     """

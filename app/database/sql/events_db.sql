@@ -31,7 +31,7 @@ CREATE TABLE `tevents` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `date` date NOT NULL,
-  `time` time NOT NULL,
+  `time` varchar(9) NOT NULL,
   `type_id` int(11) NOT NULL,
   `budget` decimal(10,2) DEFAULT NULL,
   `description` text DEFAULT NULL,

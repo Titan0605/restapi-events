@@ -1,9 +1,7 @@
 from flask import Flask
-from flask_mysqldb import MySQL
+from app.database.db import init_app
 from config import Config
-from app.routes import index
-
-mysql = MySQL()
+from app.routes import views, api
 
 def create_app(config_class = Config):
     app = Flask(__name__)
@@ -17,8 +15,9 @@ def create_app(config_class = Config):
     app.config['MYSQL_PORT'] = app.config.get('DB_PORT')
     app.config['MYSQL_CURSORCLASS'] = app.config.get('DB_CURSORCLASS')
 
-    mysql.init_app(app)
+    init_app(app)
     
-    app.register_blueprint(index.bp)
+    app.register_blueprint(views.bp)
+    app.register_blueprint(api.bp)
     
     return app
