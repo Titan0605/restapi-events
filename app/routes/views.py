@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, jsonify, current_app
+from datetime import datetime
 from mapkick.flask import Map
 import requests
 
@@ -14,7 +15,26 @@ def index():
 
         events = response.json()
 
+        for event in events:
+            if isinstance(event["date"], str):
+                event["date"] = datetime.strptime(event["date"], "%a, %d %b %Y %H:%M:%S %Z")
+
         return render_template('index.html', events=events)
+    
+    except requests.exceptions.RequestException as e:
+        return jsonify({"error": str(e)}), 500
+    
+@bp.route('/events')
+def show_events():
+    api_get_event = "http://127.0.0.1:4000/api/events"
+    
+    try:
+        response = requests.get(api_get_event)
+        response.raise_for_status()
+
+        events = response.json()
+
+        return render_template('events.html', events=events)
     
     except requests.exceptions.RequestException as e:
         return jsonify({"error": str(e)}), 500

@@ -80,9 +80,9 @@ class EventModel:
                 query += " AND type_id = %s"
                 params.append(type_id)
         
-            if budget is not None:
-                query += " AND budget <= %s"
-                params.append(budget)
+        if budget is not None:
+            query += " AND budget <= %s"
+            params.append(budget)
         
         # Ejecutar la consulta con los parámetros
         self.cur.execute(query, tuple(params))
@@ -102,6 +102,8 @@ class EventModel:
     
     def get_featured_events(self):
         query = f"SELECT * FROM tevents WHERE date >= '{date.today()}' AND date <= '{date.today() + timedelta(7)}'"
+        print(date.today())
+        print(date.today() + timedelta(7))
         self.cur.execute(query)
         self.events = self.cur.fetchall()
         self.events = self.get_details(self.events)
