@@ -34,6 +34,10 @@ def show_events():
 
         events = response.json()
 
+        for event in events:
+            if isinstance(event["date"], str):
+                event["date"] = datetime.strptime(event["date"], "%a, %d %b %Y %H:%M:%S %Z")
+
         return render_template('events.html', events=events)
     
     except requests.exceptions.RequestException as e:
