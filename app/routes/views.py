@@ -53,7 +53,10 @@ def show_event(id):
 
         event = response.json()
 
-        map = Map([{'latitude': event["location"]["lat"], 'longitude': event["location"]["lng"]}])
+        if isinstance(event["date"], str):
+                event["date"] = datetime.strptime(event["date"], "%a, %d %b %Y %H:%M:%S %Z")
+
+        map = Map([{'latitude': event["location"]["lat"], 'longitude': event["location"]["lng"], 'label': event["name"]}], zoom=14, controls=True)
 
         return render_template('event_detail.html', event=event, map=map, mapbox_token=current_app.config["MAPBOX_ACCESS_TOKEN"])
     

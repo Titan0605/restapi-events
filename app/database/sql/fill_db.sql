@@ -76,7 +76,7 @@ BEGIN
     -- Clear any existing events for clean run
     DELETE FROM tevents;
     
-    WHILE i < 100 DO
+    WHILE i < 40 DO
         -- Generate a random date in the next 9 months
         SET event_date = DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 270) DAY);
         
@@ -241,7 +241,7 @@ BEGIN
                 WHEN 10 THEN CONCAT('Evento enfocado en el aprendizaje y desarrollo de habilidades. ',
                     'Una oportunidad para expandir conocimientos y fomentar la curiosidad intelectual.')
             END,
-            CONCAT('https://example.com/events/images/chihuahua_', i + 1, '.jpg'),
+            CONCAT('chihuahua_', i + 1, '.jpg'),
             event_location,
             event_organizer,
             is_featured

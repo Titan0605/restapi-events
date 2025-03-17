@@ -46,7 +46,7 @@ class EventModel:
             return tuple(events_with_details)
 
     def get_events(self):
-        self.cur.execute("SELECT * FROM tevents ORDER BY id")
+        self.cur.execute("SELECT * FROM tevents ORDER BY date")
         self.events = self.cur.fetchall()
         self.events = self.get_details(self.events)
         close_cursor(self.cur)
@@ -83,6 +83,8 @@ class EventModel:
         if budget is not None:
             query += " AND budget <= %s"
             params.append(budget)
+
+        query += "ORDER BY date"
         
         # Ejecutar la consulta con los parámetros
         self.cur.execute(query, tuple(params))
@@ -101,7 +103,7 @@ class EventModel:
         return self.get_filtered_events(budget=max_budget)
     
     def get_featured_events(self):
-        query = f"SELECT * FROM tevents WHERE date >= '{date.today()}' AND date <= '{date.today() + timedelta(7)}'"
+        query = f"SELECT * FROM tevents WHERE date >= '{date.today()}' AND date <= '{date.today() + timedelta(7)}' ORDER BY date"
         print(date.today())
         print(date.today() + timedelta(7))
         self.cur.execute(query)
