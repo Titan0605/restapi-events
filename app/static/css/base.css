@@ -1,0 +1,33 @@
+:root {
+    --dark-teal: #324b4f;
+    --light-teal: #95b0b5;
+    --deep-blue: #005c83;
+    --teal-green: #348774;
+    --mint-green: #d1ebe3;
+    --turquoise: #19c6db;
+}
+.bg-primary-custom {
+    background-color: var(--dark-teal);
+}
+.text-brand {
+    color: var(--turquoise) !important;
+}
+.btn-custom {
+    background-color: var(--teal-green);
+    border-color: var(--teal-green);
+    color: white;
+}
+.btn-custom:hover {
+    background-color: var(--deep-blue);
+    border-color: var(--deep-blue);
+    color: white;
+}
+footer {
+    background-color: var(--dark-teal) !important;
+}
+.navbar .nav-link:hover {
+    color: var(--mint-green) !important;
+}
+.social-icon:hover {
+    color: var(--turquoise) !important;
+}
