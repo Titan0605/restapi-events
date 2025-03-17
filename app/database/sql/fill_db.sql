@@ -76,7 +76,7 @@ BEGIN
     -- Clear any existing events for clean run
     DELETE FROM tevents;
     
-    WHILE i < 100 DO
+    WHILE i < 40 DO
         -- Generate a random date in the next 9 months
         SET event_date = DATE_ADD(CURDATE(), INTERVAL FLOOR(RAND() * 270) DAY);
         
@@ -216,7 +216,7 @@ BEGIN
         VALUES (
             event_name,
             event_date,
-            MAKETIME(FLOOR(RAND() * 12) + 8, FLOOR(RAND() * 4) * 15, 0), -- Random time between 8 AM and 8 PM
+            CONCAT(LPAD(CAST(FLOOR(RAND() * 24) AS CHAR), 2, '0'), ':', LPAD(CAST(FLOOR(RAND() * 4) * 15 AS CHAR), 2, '0'), ':00'), -- Random time as string in 24-hour format (00:00:00 to 23:45:00)
             event_type,
             event_budget,
             CASE event_type
@@ -241,7 +241,7 @@ BEGIN
                 WHEN 10 THEN CONCAT('Evento enfocado en el aprendizaje y desarrollo de habilidades. ',
                     'Una oportunidad para expandir conocimientos y fomentar la curiosidad intelectual.')
             END,
-            CONCAT('https://example.com/events/images/chihuahua_', i + 1, '.jpg'),
+            CONCAT('chihuahua_', i + 1, '.jpg'),
             event_location,
             event_organizer,
             is_featured
