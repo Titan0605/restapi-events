@@ -6,6 +6,8 @@ from config import Config
 from app.routes import views, api
 from dotenv import load_dotenv
 
+""" This will create the object app to use it in the run file """
+
 def create_app(config_class = Config):
     load_dotenv()
     app = Flask(__name__)
