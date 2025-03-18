@@ -1,27 +1,28 @@
 $(function () {
-	// Manejar el envío del formulario
+	/* Function t filter the events by parameters */
+	// Function when the submit button in the form is pressed
 	$("#filterForm").on("submit", function (filter) {
-		filter.preventDefault(); // Evitar que el formulario se envíe de forma tradicional
+		filter.preventDefault(); // Prevent that the form is send in default form
 
-		var formData = $(this).serialize();
+		var formData = $(this).serialize(); // This will create the arguments by the data in the form
 
 		$.ajax({
-			url: "/api/events/filter",
+			url: "/api/events/filter", // ajax call to the endpoint of the API
 			type: "GET",
-			data: formData,
-			success: function (response) {
-				$("#eventResults").empty();
+			data: formData, // It sends the data as arguments
+			success: function (response) { // If it is a success call it will do the next
+				$("#eventResults").empty(); // It will clear previous results in the div
 
-				if (response.length === 0) {
+				if (response.length === 0) { // If the response contains 0 values it will show that it weren't found anything
 					$("#eventResults").html('<div class="col-12"><div class="alert alert-info text-center">No events were found with the selected filters.</div></div>');
 					scrollToResults();
 					return;
 				}
 
-				// Recorrer la lista de eventos y mostrarlos
+				// This iterate every event and make a card with its information
 				$.each(response, function (index, event) {
 					var eventCard = `
-			<div class="col-12 col-sm-12 col-md-6 col-xl-4">
+			<div class="col-12 col-sm-12 col-md-6 col-xl-4 mb-3">
 			<div class="card h-100 shadow-sm">
 				<div class="position-relative">
 				<img class="card-img-top" src="/static/img/events/${event.image}" alt="${event.name}"  style="min-height: 280px; object-fit: cover;"/>
@@ -32,13 +33,13 @@ $(function () {
 					<span class="px-2 py-1 rounded-2 mb-1" style="background-color: #005c83; color: white;">
   						<i class="fa-solid fa-calendar-days me-1"></i> 
   						${(() => {
-								try {
-									if (!event.date) return "Fecha no disponible";
+								try { // This will format the date give it by the API in one more readable for the user
+									if (!event.date) return "Date not available";
 									const dateString = event.date.split(" ").slice(0, 4).join(" ");
 									return dateString;
 								} catch (e) {
-									console.error("Error al procesar la fecha:", e, event.date);
-									return "Error en fecha";
+									console.error("Error processing the date:", e, event.date);
+									return "Date error";
 								}
 							})()}
 					</span>
@@ -58,13 +59,12 @@ $(function () {
 			</div>
 		`;
 
-					$("#eventResults").append(eventCard);
+					$("#eventResults").append(eventCard); // This add the card of the each event to the div
 				});
 
-				// Después de cargar todos los resultados, desplazar la pantalla
-				scrollToResults();
+				scrollToResults(); // This will scroll the page to the results
 			},
-			error: function (error) {
+			error: function (error) { // In case that an error ocurrs it will shown an error
 				console.error("Error when filtering events:", error);
 				$("#eventResults").html('<div class="col-12"><div class="alert alert-danger">An error occurred while searching for events. Please try again.</div></div>');
 				// También desplazar en caso de error
@@ -73,20 +73,16 @@ $(function () {
 		});
 	});
 
-	// Función para desplazar a la posición correcta
+	// Function to scroll
 	function scrollToResults() {
-		// Pequeño retraso para asegurar que el DOM se ha actualizado
 		setTimeout(function () {
-			// Obtener el div de filtros
 			var filterDiv = $("#event-filters");
-
-			// Desplazar la pantalla para que el div de filtros quede en la parte superior
 			$("html, body").animate(
 				{
 					scrollTop: filterDiv.offset().top,
 				},
 				500
-			); // Animación de 500ms para un desplazamiento suave
+			); // Animation of 500ms for smooth scrolling
 		}, 100);
 	}
 });

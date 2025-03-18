@@ -27,6 +27,8 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `tevents`
 --
 
+/* SQL to create the events database */
+
 CREATE TABLE `tevents` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
